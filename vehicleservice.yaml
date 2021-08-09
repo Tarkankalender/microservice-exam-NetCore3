@@ -2,7 +2,7 @@
 apiVersion: v1
 metadata:
   name: dodvehicle-service
-  namespace: Dod-test
+  namespace: dod-test
   annotations:
    cloud.google.com/neg: '{"exposed_ports": {"80":{}}}'
   labels:
