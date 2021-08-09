@@ -1,0 +1,49 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "40"
+  generation: 43
+  labels:
+    app: vehicle-test
+  name: vehicle-test
+  namespace: Dod-test
+spec:
+  progressDeadlineSeconds: 2147483647
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: vehicle-test
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: vehicle-test
+    spec:
+      containers:
+        - name: vehicle-test
+          image: organik58/dod-vehicleservice:v1
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: test
+          resources:
+            limits:
+              memory: 1Gi
+            requests:
+              memory: 250Mi
+      nodeSelector:
+        env: test
+      imagePullSecrets:
+        - name: regsecret
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
