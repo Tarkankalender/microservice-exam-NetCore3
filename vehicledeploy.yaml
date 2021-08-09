@@ -7,7 +7,7 @@ metadata:
   labels:
     app: vehicle-test
   name: vehicle-test
-  namespace: Dod-test
+  namespace: dod-test
 spec:
   progressDeadlineSeconds: 2147483647
   replicas: 1
